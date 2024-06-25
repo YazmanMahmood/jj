@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Firebase Node</title>
+  <!-- Import Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js"></script>
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyAmVSOm8g6p4F3ZY4jxIEUTQH_oFllo1hg",
+  authDomain: "greenhouse-raiwind.firebaseapp.com",
+  databaseURL: "https://greenhouse-raiwind-default-rtdb.firebaseio.com",
+  projectId: "greenhouse-raiwind",
+  storageBucket: "greenhouse-raiwind.appspot.com",
+  messagingSenderId: "338760023791",
+  appId: "1:338760023791:web:667a022e8b69459eb2651a",
+  measurementId: "G-CPD0XFLYN5"
+};
+
+
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database(); // Get the database instance
+
+    // Function to update water flow in Firebase
+    function updateWaterFlow() {
+      const newValue = document.getElementById("waterFlowValue").value;
+      const nodePath = 'GreenHouse Raiwind/ESP1/ESP_20240622030456/water flow';  // Replace with your actual path
+
+      const nodeRef = database.ref(nodePath);
+
+      nodeRef.set(newValue)
+        .then(() => {
+          console.log("Water flow updated successfully!");
+          alert("Water flow updated successfully!");
+        })
+        .catch((error) => {
+          console.error("Error updating water flow:", error);
+          alert("Error updating water flow: " + error.message);
+        });
+    }
+  </script>
+</head>
+<body>
+  <h1>Update Water Flow in Firebase</h1>
+  <label for="waterFlowValue">Enter Water Flow Value:</label>
+  <input type="text" id="waterFlowValue">
+  <button onclick="updateWaterFlow()">Update Water Flow</button>
+</body>
+</html>
